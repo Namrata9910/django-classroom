@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile :: {% endblock title %}
+
+{% block content %}
+<div class="container text-dark">
+<div class="row flex-lg-nowrap">
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; {% if not request.user.image %} background-color: rgb(233, 236, 239);{% endif %}">
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                        {% if request.user.image %}
+                          <a href="{{ request.user.image.url }}">
+                            <img src="{{ request.user.image_thumb.url}}" alt="{{request.user.get_full_name}}">
+                          </a>
+                        {% else %}
+                          Add a Picture
+                        {% endif %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h3 class="pt-sm-2 pb-1 mb-0 text-nowrap ">
+                      {{ request.user.get_full_name }}
+                    </h3>
+                    <p class="mb-0">{{ request.user.email }}</p>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <div class="text-muted"><small><span class="font-weight-bold">Joined</span> {{request.user.date_joined.date}}</small></div>
+                    <div class="text-muted"><small><span class="font-weight-bold">Last login</span> {{ request.user.last_login.date }}</small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="active nav-link">Settings</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form class="form" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col font-weight-bold">
+                        <div class="row">
+                          {% csrf_token %}
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                              <input type="text" class="form-control form-control-user"
+                                     id="{{ form.first_name.id_for_label }}"
+                                     name="{{ form.first_name.html_name }}"
+                                     placeholder="First Name"
+                                     value="{{ form.first_name.value | default_if_none:'' }}"
+                                     required>
+                              {{ form.first_name.errors }}
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                              <input type="text" class="form-control form-control-user"
+                                     id="{{ form.last_name.id_for_label }}"
+                                     name="{{ form.last_name.html_name }}"
+                                     value="{{ form.last_name.value | default_if_none:'' }}"
+                                     placeholder="Last Name">
+                              {{ form.last_name.errors }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="{{ form.email.id_for_label }}">Email</label>
+                              <input type="email" class="form-control form-control-user"
+                                     id="{{ form.email.id_for_label }}"
+                                     name="{{ form.email.html_name }}"
+                                     placeholder="Email Address"
+                                     value="{{ form.email.value | default_if_none:'' }}"
+                                     required>
+                              {% for error in form.email.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <span>Change Photo</span>
+                            <div class="custom-file form-control-user mt-2">
+                              <label class="custom-file-label" for="{{ form.image.id_for_label }}">Change Photo</label>
+                              <input type="file"
+                                     class="custom-file-input"
+                                     id="{{ form.image.id_for_label }}"
+                                     name="{{ form.image.html_name }}"
+                                     accept="image/*">
+                            </div>
+                            {% if request.user.image %}
+                              <div class="form-check mt-1">
+                                <input type="checkbox" name="image-clear" class="form-check-input" id="image-clear_id">
+                                <label class="ml-1 form-check-label" for="image-clear_id">Clear</label>
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      {% if request.user.has_usable_password %}
+                          <div class="col-12 col-sm-6 mt-4 mb-2">
+                            <a href="password_change">Change password</a>
+                        </div>
+                      {% else %}
+                          <div class="col-12 col-sm-6 mt-4 mb-2">
+                            <a href="password_set">Set Password</a>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+{% endblock content %}
+
+{% block extra_script %}
+  <script>
+
+</script>
+{% endblock extra_script %}

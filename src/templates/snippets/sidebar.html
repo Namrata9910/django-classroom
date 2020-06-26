@@ -1,0 +1,58 @@
+{% load static %}
+<!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <img class="img-responsive" src="{% static 'img/icon/favicon-32x32.png' %}">
+        </div>
+        <div class="sidebar-brand-text mx-3">Classroom</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      {% if request.user.is_authenticated %}
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Admin
+        </div>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link collapsed admin" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Admin</span>
+          </a>
+          <div id="collapseAdmin" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Enquiry</h6>
+                <a id="ota-link" class="collapse-item" href="#">OTA</a>
+            </div>
+          </div>
+        </li>
+
+
+      {% endif %}
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->

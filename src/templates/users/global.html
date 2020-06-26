@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Global Settings :: {% endblock title %}
+
+{% block content %}
+  <div class="container text-dark">
+    <div class="row flex-lg-nowrap">
+
+      <div class="col">
+        <div class="row">
+          <div class="col mb-3">
+            <div class="card">
+              <div class="card-header">
+                <h3>Global Settings</h3>
+              </div>
+              <div class="card-body {% if form.non_field_errors %} alert-danger list-unstyled{% endif %}">
+                  <div class="row">
+                    <div class="col font-weight-bold">
+                      <form action="{% url 'global_settings' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row {% if form.logo.errors %}alert-danger list-unstyled{% endif %}">
+                          {% if object.logo %}
+                            <div class="col-sm-3 col-lg-3 mr-lg-n5">
+                              <p class="text-dark">Current Logo</p>
+                              <img class="img-thumbnail mt-n2" src="{{ object.logo.url }}" width="90px">
+                            </div>
+                          {% endif %}
+                          <div class="col-sm-9 col {% if object.logo %}ml-lg-n5{% endif %}">
+                            <span class="text-dark">Logo</span>
+                            <div class="custom-file form-control-user mt-2">
+                              <label class="custom-file-label" for="{{ form.image.id_for_label }}">Logo</label>
+                              <input type="file"
+                                     class="custom-file-input"
+                                     id="{{ form.logo.id_for_label }}"
+                                     name="{{ form.logo.html_name }}"
+                                     accept="image/*">
+                              {% for error in form.logo.errors %}
+                                {{ error }}
+                              {% endfor %}
+                            </div>
+                            {% if object.logo %}
+                              <div class="form-check mt-1">
+                                {{ form.clear }}
+                                <label class="ml-1 form-check-label text-dark" for="id_clear">Clear</label>
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="row mt-2 {% if form.address.errors %}alert-danger list-unstyled{% endif %}">
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="{{ form.address.id_for_label }}" class="text-dark">Address</label>
+                              {{ form.address }}
+                              {% for error in form.address.errors %}
+                                {{ error }}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          {% for error in form.non_field_errors %}
+                            {{error}}
+                          {% endfor %}
+                        </div>
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                          </div>
+                       </div>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}

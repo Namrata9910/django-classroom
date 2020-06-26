@@ -1,0 +1,20 @@
+#header {
+    background: #42444e;
+    color: #eaecf4;
+}
+
+#user-tools {
+    font-size: 14px;
+}
+
+.module caption {
+    background: #6b6d7d;
+}
+
+div.breadcrumbs {
+    background: #6b6d7d;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #6b6d7d;
+}
