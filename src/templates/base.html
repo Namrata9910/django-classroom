@@ -9,10 +9,14 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Classroom for noobs">
+  <meta name="author" content="vinayak">
 
-  <title>{% block title %}{% endblock title %} Classroom</title>
+  {% if title %}
+      <title>Classroom :: {{title}}</title>
+  {% else %}
+      <title>{% block title %}{% endblock title %} Classroom</title>
+  {% endif %}
   <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/icon/favicon-96x96.png' %}">
 
   <!-- Custom fonts for this template-->
@@ -82,13 +86,15 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  {% block logout_modal %}
-    {% cache None logout_modal %}
-      {% include 'snippets/logout_modal.html' %}
+  <!-- Modal -->
+  {% block modal %}
+    {% cache None modal %}
+    {% include 'snippets/logout_modal.html' %}
+    {% include 'snippets/feedback.html' %}
     {% endcache %}
-  {% endblock logout_modal %}
-  <!-- End of logout modal -->
+  {% endblock modal %}
+  <!-- End of modal -->
+
 
   {% endblock body %}
 

@@ -32,6 +32,6 @@ def Register(request):
 def Profile(request):
     if request.method == "POST":
         pass
-    form = RegisterForm()
+    form = StudentProfileForm()
     data = {"form": form}
     return render(request, "users/profile.html", data)

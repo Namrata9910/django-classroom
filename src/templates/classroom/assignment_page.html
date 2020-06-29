@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Assignments :: {% endblock title %}
+{% block title %}Dashboard :: {% endblock title %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
@@ -18,39 +18,31 @@
       </button>
   </div>
 
-
-
-
-  <!-- Content Row -->
-  {% if request.user.is_student %}
-    <!--Student Card-->
-    {% for subject in request.user.student.class_assigned.subject.all  %}
-
+  {% for assignment in assignments %}
     <div class="row mb-2 p-3">
-        <a href="{% url 'assignment' code=subject.code %}" class="btn w-100">
       <div class="card border-left-success shadow h-100 py-2 w-100">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col text-left mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">subject</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  {{ subject.name }} 
+                  {{ assignment.title }} 
               </div>
               <div class="text-muted small mt-1"> {{ subject.code }} </div>
             </div>
-            <div class="col-auto mr-4 font-weight-bold h5 mt-2"><b>Assignment:</b>{{ subject.assignment.all|length }}</div>
             <div class="col-auto">
                 <i class="fas fa-stream fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
       </div>
-     </a>
     </div>
 
-    {% endfor %}
-  {% endif  %}
-   <!-- /Student Card-->
+
+
+
+  {% endfor %}
+
 
   <!-- Content Row -->
 
