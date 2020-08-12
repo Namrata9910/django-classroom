@@ -7,7 +7,10 @@ A Online ClassRoom created using python (django framework) at backend .
 Some of the features of website include implementation of login/logout system for students/teacher ,
 it's a responsive website which is also a standalone progressive web app and provide dynamic notification and content from backend.
 
-<p align="center"><img src="img/screen.png"/></p>
+All classes join by student|  assignment in each classroom
+:-------------------------:|:-------------------------:
+![](img/s1.png)  |  ![](img/s2.png)
+
 
 # Why Django ?
 
