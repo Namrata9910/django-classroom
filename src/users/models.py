@@ -15,7 +15,9 @@ class Teacher(models.Model):
     phone_no = models.CharField(default="", max_length=20, blank=True, null=True)
     branch = models.CharField(default="", max_length=500, blank=True, null=True)
     class_assigned = models.ForeignKey(ClassRoom, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(default="profile_pics/default.jpg", upload_to="profile_pics")
+    image = models.ImageField(
+        default="teacher_profile_pics/default.jpg", upload_to="teacher_profile_pics"
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -37,7 +39,9 @@ class Student(models.Model):
     year = models.CharField(default="", max_length=20, blank=True, null=True)
     roll_no = models.CharField(default="", max_length=20, blank=True, null=True)
     class_assigned = models.ForeignKey(ClassRoom, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(default="profile_pics/default.jpg", upload_to="profile_pics")
+    image = models.ImageField(
+        default="teacher_profile_pics/default.jpg", upload_to="student_profile_pics"
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

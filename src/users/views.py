@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import *
+from .forms import StudentRegisterForm, StudentUpdateForm
 
 
 def Login(request):
@@ -11,7 +11,7 @@ def Login(request):
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            form = login(request, user)
+            login(request, user)
             messages.success(request, f" wecome {username} !!")
             return redirect("index")
         else:
@@ -24,7 +24,7 @@ def Login(request):
 def Register(request):
     if request.method == "POST":
         pass
-    form = RegisterForm()
+    form = StudentRegisterForm()
     data = {"form": form, "title": Register}
     return render(request, "users/register.html", data)
 
@@ -32,6 +32,6 @@ def Register(request):
 def Profile(request):
     if request.method == "POST":
         pass
-    form = StudentProfileForm()
+    form = StudentUpdateForm()
     data = {"form": form}
     return render(request, "users/profile.html", data)

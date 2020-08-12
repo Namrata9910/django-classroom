@@ -8,7 +8,6 @@ from django.conf.urls.static import static
 
 admin.site.site_header = "ClassRoom Admin"
 admin.site.site_title = "ClassRoom Admin"
-# admin.site.site_url = 'http://coffeehouse.com/'
 admin.site.index_title = "Welcome, Administration Panel"
 admin.empty_value_display = "**Empty**"
 

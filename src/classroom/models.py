@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Subject(models.Model):
@@ -12,7 +13,11 @@ class Subject(models.Model):
 class Assignment(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="assignment")
+    created = models.DateTimeField(default=timezone.now)
+    last_date = models.DateTimeField(default=timezone.now,blank=True)
+    subject = models.ForeignKey(
+        Subject, on_delete=models.CASCADE, related_name="assignment"
+    )
 
     def __str__(self):
         return f"{self.title}"
@@ -21,6 +26,9 @@ class Assignment(models.Model):
 class Announcement(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
+    subject = models.ForeignKey(
+        Subject, on_delete=models.CASCADE, related_name="announcement"
+    )
 
     def __str__(self):
         return f"{self.title}"
