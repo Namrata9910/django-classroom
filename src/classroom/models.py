@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 
+
+
 class Subject(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=10)

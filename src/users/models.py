@@ -54,3 +54,12 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Profile"
+
+
+class Attendance(models.Model):
+    attendees = models.ManyToManyField(Student)
+    created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.created}"
+
